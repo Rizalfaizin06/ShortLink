@@ -16,7 +16,7 @@
 
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
         @guest
-            <div class="py-5 px-24 ">
+            <div class=" ">
 
 
                 @yield('content')
@@ -42,7 +42,7 @@
                     </button>
                     <div class="hidden w-full md:block md:w-auto" id="navbar-default">
                         <ul
-                            class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                            class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-800 dark:border-gray-700">
 
                             <li>
                                 <p class="block py-2 px-3 text-gray-900 rounded-sm md:border-0 md:p-0 dark:text-white ">
@@ -77,7 +77,7 @@
                 </div>
             </nav>
 
-            <div class="py-5 px-24 ">
+            <div class="py-5 px-2 ">
                 {{-- @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}

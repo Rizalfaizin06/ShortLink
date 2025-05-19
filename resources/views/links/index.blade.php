@@ -17,7 +17,7 @@
             </script>
         @endif
         <!-- Search and Filter Section -->
-        <div class="bg-white rounded-lg shadow-md p-6 mb-8 ">
+        <div class="bg-white border-gray-200 dark:bg-gray-700 rounded-lg shadow-md p-6 mb-8 ">
             <div class="flex flex-col md:flex-row md:justify-between space-y-4 md:space-y-0">
                 <!-- Search -->
                 <div class="flex-1 md:mr-4">
@@ -34,12 +34,12 @@
                                     </svg>
                                 </div>
                                 <input type="text"
-                                    class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                    class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white dark:bg-gray-600 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500 sm:text-sm "
                                     placeholder="Search links..." name="search" value="{{ request()->search }}">
 
                             </div>
                             <button type="submit"
-                                class="block w-auto py-2 px-3 bg-white-600 border border-blue-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-blue-800 no-underline font-semibold hover:no-underline sm:text-sm">Search</button>
+                                class="block w-auto py-2 px-3 bg-white-600 border border-blue-300 dark:border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 dark:focus:ring-gray-500 focus:border-blue-500 dark:focus:border-gray-500 text-blue-800 dark:text-white no-underline font-semibold hover:no-underline sm:text-sm">Search</button>
                         </div>
                     </form>
                 </div>
@@ -60,7 +60,7 @@
                         <option value="inactive">Inactive</option>
                     </select> --}}
                     <a href="{{ route('links.create') }}"
-                        class="block w-full md:w-auto py-2 px-3 bg-blue-600 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-white no-underline font-semibold hover:no-underline sm:text-sm text-center">
+                        class="block w-full md:w-auto py-2 px-3 bg-blue-600 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-white no-underline font-semibold hover:no-underline sm:text-sm text-center dark:bg-blue-500 dark:border-gray-300 dark:text-white">
                         Create Link
                     </a>
 
@@ -73,26 +73,28 @@
 
             @foreach ($links as $link)
                 <!-- Card 1 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                <div
+                    class="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                     <div class="p-6">
                         <div class="flex justify-between items-start mb-4">
-                            <h2 class="text-lg font-semibold text-gray-800 mb-1 truncate">{{ $link->url_title }}
+                            <h2 class="text-lg font-semibold text-gray-800 mb-1 truncate dark:text-gray-50">
+                                {{ $link->url_title }}
                             </h2>
 
                         </div>
 
                         <div class="mb-3">
-                            <p class="text-sm text-gray-500 mb-1">Original URL:</p>
-                            <p class="text-sm text-gray-600 truncate">
+                            <p class="text-sm text-gray-500 dark:text-gray-200 mb-1">Original URL:</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-50 truncate">
                                 {{ $link->original_url }}</p>
                         </div>
 
 
                         <div class="mb-4">
-                            <p class="text-sm text-gray-500 mb-1">Short Link:</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-200 mb-1">Short Link:</p>
                             <div class="flex items-center">
                                 <a href="{{ $link->slug }}" target="_blank"
-                                    class="text-sm text-blue-600 hover:underline truncate">link.unaki.ac.id/{{ $link->slug }}</a>
+                                    class="text-sm text-blue-600 dark:text-blue-400 hover:underline truncate">link.unaki.ac.id/{{ $link->slug }}</a>
                                 <div class="relative ml-2 group">
                                     <button id="copyButton-{{ $link->id }}"
                                         data-clipboard-text="https://link.unaki.ac.id/{{ $link->slug }}"
@@ -117,11 +119,13 @@
                         </div>
                         @if (Auth::user()->isAdmin())
                             <div class="mb-3">
-                                <p class="text-sm text-gray-500 mb-1">Created By: {{ $link->user->name }}</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-200 mb-1">Created By:
+                                    {{ $link->user->name }}</p>
                             </div>
                         @endif
                         <div class="mb-3">
-                            <p class="text-sm text-gray-500 mb-1">Created At: {{ $link->created_at->format('Y-m-d H:i') }}
+                            <p class="text-sm text-gray-500 dark:text-gray-200 mb-1">Created At:
+                                {{ $link->created_at->format('Y-m-d H:i') }}
                             </p>
 
 

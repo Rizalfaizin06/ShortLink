@@ -1,19 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="bg-white shadow-md rounded-lg p-6">
+    <div class="bg-white dark:bg-gray-700 shadow-md rounded-lg p-6">
         <div class="flex justify-between items-center mb-4">
-            <h5 class="text-xl font-semibold">User Management</h5>
+            <h5 class="text-xl font-semibold text-gray-800 dark:text-white">User Management</h5>
             <a href="{{ route('users.create') }}"
-                class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700">
-                Create New User
+                class="bg-blue-600 dark:bg-blue-500 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700">
+                Create User
             </a>
         </div>
 
 
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <div class="relative overflow-x-auto shadow-md rounded-lg">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-800 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
                             Name
