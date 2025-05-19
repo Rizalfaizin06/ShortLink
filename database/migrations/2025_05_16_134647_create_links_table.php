@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->string('url_title');
             $table->string('slug')->unique();
             $table->text('original_url');
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->integer('clicks')->default(0);
             $table->timestamps();
         });

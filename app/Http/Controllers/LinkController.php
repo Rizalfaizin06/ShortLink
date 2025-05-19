@@ -11,13 +11,20 @@ use Illuminate\Support\Facades\Auth;
 
 class LinkController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        if (Auth::user()->role_id === 1) {
-            $links = Link::with('user')->latest()->get();
-        } else {
-            // $links = Auth::user()->links()->latest()->get();
+        $search = $request->input('search', '');
+
+        $query = Auth::user()->role_id === 1
+            ? Link::with('user')
+            : Auth::user()->links();
+
+        if ($search) {
+            $query->where('url_title', 'like', "%{$search}%")
+                ->orWhere('original_url', 'like', "%{$search}%")
+                ->orWhere('slug', 'like', "%{$search}%");
         }
+        $links = $query->latest()->paginate(9);
 
         return view('links.index', compact('links'));
     }
@@ -30,7 +37,7 @@ class LinkController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'url_title' => 'required|string',
+            'url_title' => 'required|string|max:255',
             'original_url' => 'required|url',
             'custom_slug' => 'nullable|unique:links,slug'
         ]);
@@ -38,8 +45,8 @@ class LinkController extends Controller
         $slug = $request->custom_slug;
         if (empty($slug)) {
             do {
-                $slug = Str::random(4);
-            } while (Link::where('slug', operator: $slug)->exists());
+                $slug = strtolower(Str::random(4));
+            } while (Link::where('slug', $slug)->exists());
         }
 
 
@@ -57,31 +64,39 @@ class LinkController extends Controller
 
     public function edit(Link $link)
     {
-        if (!Auth::user()->role_id === 1 && $link->user_id !== Auth::id()) {
+        // dd(Auth::user()->role_id);
+        // dd(Auth::id());
+        if (Auth::user()->role_id != 1 && $link->user_id != Auth::id()) {
             abort(403);
         }
 
-        return view('links.edit', compact('link'));
+        return view('links.edit', data: compact('link'));
     }
 
     public function update(Request $request, Link $link)
     {
-        if (!Auth::user()->role_id === 1 && $link->user_id !== Auth::id()) {
+        if (Auth::user()->role_id != 1 && $link->user_id != Auth::id()) {
             abort(403);
         }
 
         $request->validate([
+            'url_title' => 'required|string|max:255',
             'original_url' => 'required|url',
-            'custom_slug' => 'nullable|alpha_dash|unique:links,slug,' . $link->id
+            'custom_slug' => 'nullable|unique:links,slug,' . $link->id
         ]);
 
         $slug = $request->custom_slug;
-        if (!empty($slug)) {
-            $link->slug = $slug;
+        if (empty($slug)) {
+            do {
+                $slug = strtolower(Str::random(4));
+            } while (Link::where('slug', operator: $slug)->exists());
         }
 
-        $link->original_url = $request->original_url;
-        $link->save();
+        $link->update([
+            'url_title' => $request->input('url_title'),
+            'original_url' => $request->input('original_url'),
+            'slug' => $slug,
+        ]);
 
         return redirect()->route('links.index')
             ->with('success', 'Link updated successfully');

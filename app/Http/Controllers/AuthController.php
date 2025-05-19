@@ -22,9 +22,9 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt(credentials: $credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('dashboard');
+            return redirect()->intended('/');
         }
 
         return back()->withErrors([
@@ -66,6 +66,6 @@ class AuthController extends Controller
 
     public function dashboard()
     {
-        return view('dashboard');
+        return redirect()->route('links.index');
     }
 }
