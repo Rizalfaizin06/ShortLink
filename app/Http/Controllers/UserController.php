@@ -115,7 +115,7 @@ class UserController extends Controller
         }
 
         // Update password menjadi '12345678'
-        $user->password = Hash::make('12345678');
+        $user->password = Hash::make('universitasaki');
         $user->save();
 
         // Kembalikan dengan pesan sukses

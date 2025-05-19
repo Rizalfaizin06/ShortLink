@@ -1,45 +1,3 @@
-{{-- @extends('layouts.app')
-
-@section('content')
-    <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">User Management</h5>
-            <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm">Create New User</a>
-        </div>
-        <div class="card-body">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($users as $user)
-                        <tr>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>{{ $user->role->name }}</td>
-                            <td class="d-flex">
-                                <a href="{{ route('users.edit', $user) }}" class="btn btn-sm btn-info me-2">Edit</a>
-                                <form action="{{ route('users.destroy', $user) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger"
-                                        onclick="return confirm('Are you sure?')">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
-@endsection --}}
-
-
 @extends('layouts.app')
 
 @section('content')
@@ -120,50 +78,5 @@
         </div>
 
 
-        {{-- <div class="overflow-x-auto">
-            <table class="min-w-full table-auto border-separate border-spacing-0">
-                <thead>
-                    <tr>
-                        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700 bg-gray-100">Name</th>
-                        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700 bg-gray-100">Email</th>
-                        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700 bg-gray-100">Role</th>
-                        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700 bg-gray-100">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($users as $user)
-                        <tr class="border-t border-gray-200">
-                            <td class="px-4 py-2 text-sm text-gray-700">{{ $user->name }}</td>
-                            <td class="px-4 py-2 text-sm text-gray-700">{{ $user->email }}</td>
-                            <td class="px-4 py-2 text-sm text-gray-700">{{ $user->role->name }}</td>
-                            <td class="px-4 py-2 text-sm">
-                                <div class="flex space-x-2">
-                                    <a href="{{ route('users.edit', $user) }}"
-                                        class="text-blue-600 hover:text-blue-800 px-3 py-1 rounded-md text-sm border border-blue-600 hover:bg-blue-50">
-                                        Edit
-                                    </a>
-                                    <form action="{{ route('users.destroy', $user) }}" method="POST" class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                            class="text-red-600 hover:text-red-800 px-3 py-1 rounded-md text-sm border border-red-600 hover:bg-red-50"
-                                            onclick="return confirm('Are you sure?')">
-                                            Delete
-                                        </button>
-                                    </form>
-                                    <form action="{{ route('users.resetPassword', $user) }}" method="POST"
-                                        style="display: inline-block;">
-                                        @csrf
-                                        <button type="submit" class="text-red-600 hover:underline ml-2"
-                                            onclick="return confirm('Are you sure you want to reset the password to 12345678?')">Reset
-                                            Password</button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div> --}}
     </div>
 @endsection
